@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: headImports}"></head>
+
+<body>
+	 <!-- partial:partials/_navbar.html -->
+	<nav th:replace="~{fragments/navbar :: navbarImports}"></nav>
+	<!-- partial:partials/_topbar.html -->
+    <nav th:replace="~{fragments/topbar :: topbarImports}"></nav>
+
+	<!-- ======= Hero Section ======= -->
+	<section id="hero" class="d-flex align-items-center">
+		<div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+			<h1>Bem-Vindo(a),<span th:text="${#authentication.getPrincipal().getNome()}"></span></h1>	
+			<div class="row">
+				<div class="col-lg-8">					
+						<h1>Ao <span>Boteco da Tilápia</span></h1>			
+					<h2>Entregando boa comida há mais de 10 anos!</h2>
+
+					<div class="btns">
+						<a href="/menu" class="btn-menu animated fadeInUp scrollto">Nosso Cardápio</a>
+						<a href="/pedido/criar" class="btn-book animated fadeInUp scrollto">Faça Pedido</a>
+					</div>
+				</div>
+				<div class="col-lg-4 d-flex align-items-center justify-content-center position-relative"
+					data-aos="zoom-in" data-aos-delay="200">
+					<a href="https://www.youtube.com/watch?v=u6BOC7CDUTQ" class="glightbox play-btn"></a>
+				</div>
+			</div>
+		</div>
+	</section><!-- End Hero -->
+	<main id="main">
+
+		<!-- ======= Comentarios Section ======= -->
+		<section id="testimonials" class="testimonials section-bg">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-title">
+					<h2>DEPOIMENTOS</h2>
+					<p>O que estão dizendo sobre nós</p>
+				</div>
+
+				<div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+					<div class="swiper-wrapper">
+
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+									Excelente experiência no Boteco da Tilápia! A comida estava deliciosa, o serviço foi
+									impecável e o ambiente foi acolhedor.
+									Desde a entrada até a sobremesa, cada prato foi preparado com cuidado e apresentado
+									lindamente. A equipe foi muito atenciosa e prestativa, garantindo que nossa refeição
+									fosse perfeita.
+									Mal posso esperar para voltar e experimentar mais do menu maravilhoso deste lugar.
+									Altamente recomendado para quem procura uma experiência gastronômica memorável!
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+								<h3>Rutiele Rios</h3>
+								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5</h4>
+							</div>
+						</div><!-- End testimonial item -->
+
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+									Muito boa.uma mokeke de saborear com muito gosto . Amei já até recomendei. Amigo e
+									parente atendimento 10.
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+								<h3>Edlene Bras</h3>
+								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5</h4>
+							</div>
+						</div><!-- End testimonial item -->
+
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+									Ambiente bom, com bom atendimento e otimas refeições.
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+								<h3>Wesley Rasteli</h3>
+								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5</h4>
+							</div>
+						</div><!-- End testimonial item -->
+
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+									Melhor peixe frito q já comi.
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+								<h3>Rayana Moraes</h3>
+								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5</h4>
+							</div>
+						</div><!-- End testimonial item -->
+
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+									Comida maravilhosa, e a simpatia da dona está de parabéns.
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+								<h3>Camila Matos</h3>
+								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5r</h4>
+							</div>
+						</div><!-- End testimonial item -->
+
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+
+			</div>
+		</section><!-- End Testimonials Section -->
+
+
+
+	</main><!-- End #main -->
+	<!-- ======= Footer ======= -->
+	<footer th:replace="~{fragments/footer :: footerImports}"></footer>
+
+	<div id="preloader"></div>
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+		<i class="bi bi-arrow-up-short"></i></a>
+
+
+	<!-- Vendor JS Files -->
+	<script src="js/eventos.js"></script>
+	<script src="../css/vendor/aos/aos.js"></script>
+	<script src="../css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../css/vendor/glightbox/js/glightbox.min.js"></script>
+	<script src="../css/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+
+	<!-- Template Main JS File -->
+	<script src="../js/main.js"></script>
+</body>
+
+</html>

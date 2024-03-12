@@ -1,0 +1,46 @@
+<nav th:fragment="topbarImports" class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row justify-content-end">
+	<!-- ======= Top Bar ======= -->
+	<div id="topbar" class="d-flex align-items-center fixed-top">
+		<div class="container d-flex justify-content-center justify-content-md-between">
+			<div class="contact-info d-flex align-items-center">
+				<i class="bi bi-phone d-flex align-items-center"><span>71 9 8861-1417 </span></i>
+				<i class="bi bi-clock d-flex align-items-center ms-4"><span> Qua - Seg: 10h - 18h</span></i>
+			</div>
+			<!-- IMAGEM PERFIL -->
+			<nav id="navbar"  class="navbar order-last order-lg-0">
+				<ul>
+					<li class="dropdown">
+						<a sec:authorize="hasAuthority('CLIENTE')" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+							<img th:attr="src=@{'/img/img-uploads/' + ${#authentication.getPrincipal().displayImage()}}">
+						</a>
+						<a sec:authorize="hasAuthority('VENDEDOR')" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+							<img th:attr="src=@{'/img/img-uploads/' + ${#authentication.getPrincipal().displayImage()}}">
+						</a>
+						<ul>
+							<li>
+								<a sec:authorize="hasAuthority('CLIENTE')" th:href="@{cliente/editar-perfil(id=${#authentication.getPrincipal.getId()})}">
+									  Editar Perfil
+								</a>
+							</li>
+							<li>
+								<a sec:authorize="hasAuthority('VENDEDOR')" th:href="@{vendedor/editar-perfil(id=${#authentication.getPrincipal.getId()})}">
+									 Editar Perfil</a>
+							<li>
+								<a sec:authorize="hasAuthority('CLIENTE')" th:href="@{/redefinir-senha/cliente}">Redefinir sua senha</a>
+							</li>
+							<li>
+								<a sec:authorize="hasAuthority('VENDEDOR')" th:href="@{/redefinir-senha/vendedor}">Redefinir sua senha</a>
+							</li>
+							<li>
+								<a th:href="@{/logout}"> Logout </a>
+							</li>
+						</ul>
+			</nav>
+
+			<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+				data-toggle="minimize">
+				<span class="icon-menu"></span>
+			</button>
+		</div>
+	</div>
+</nav>
