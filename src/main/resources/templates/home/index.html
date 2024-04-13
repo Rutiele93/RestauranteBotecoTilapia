@@ -12,7 +12,9 @@
 	<!-- ======= Hero Section ======= -->
 	<section id="hero" class="d-flex align-items-center">
 		<div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
-			<h1>Bem-Vindo(a),<span th:text="${#authentication.getPrincipal().getNome()}"></span></h1>	
+			<h1 th:if="${#authorization.expression('isAuthenticated()')}">
+				Bem-Vindo(a), <span th:text="${#authentication.getPrincipal()?.getNome()}"></span>
+			</h1>
 			<div class="row">
 				<div class="col-lg-8">					
 						<h1>Ao <span>Boteco da Tilápia</span></h1>			
@@ -25,7 +27,7 @@
 				</div>
 				<div class="col-lg-4 d-flex align-items-center justify-content-center position-relative"
 					data-aos="zoom-in" data-aos-delay="200">
-					<a href="https://www.youtube.com/watch?v=u6BOC7CDUTQ" class="glightbox play-btn"></a>
+					<a href="https://www.canva.com/design/DAGAnLakep8/9oeE1nMOWzWbAQ0wr3G-Pw/watch?utm_content=DAGAnLakep8&utm_campaign=designshare&utm_medium=link&utm_source=editor" class="glightbox play-btn" target="_blank" rel="noopener noreferrer"></a>
 				</div>
 			</div>
 		</div>
@@ -57,7 +59,7 @@
 									Altamente recomendado para quem procura uma experiência gastronômica memorável!
 									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
 								</p>
-								<img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+								<img src="../../img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
 								<h3>Rutiele Rios</h3>
 								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5</h4>
 							</div>
@@ -71,7 +73,7 @@
 									parente atendimento 10.
 									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
 								</p>
-								<img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+								<img src="../../img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
 								<h3>Edlene Bras</h3>
 								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5</h4>
 							</div>
@@ -84,7 +86,7 @@
 									Ambiente bom, com bom atendimento e otimas refeições.
 									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
 								</p>
-								<img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+								<img src="../../img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
 								<h3>Wesley Rasteli</h3>
 								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5</h4>
 							</div>
@@ -97,7 +99,7 @@
 									Melhor peixe frito q já comi.
 									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
 								</p>
-								<img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+								<img src="../../img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
 								<h3>Rayana Moraes</h3>
 								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5</h4>
 							</div>
@@ -110,9 +112,9 @@
 									Comida maravilhosa, e a simpatia da dona está de parabéns.
 									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
 								</p>
-								<img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+								<img src="../../img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
 								<h3>Camila Matos</h3>
-								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5r</h4>
+								<h4>Comida: 5/5 | Serviço: 5/5 | Ambiente: 5/5</h4>
 							</div>
 						</div><!-- End testimonial item -->
 
@@ -135,15 +137,15 @@
 
 
 	<!-- Vendor JS Files -->
-	<script src="js/eventos.js"></script>
-	<script src="../css/vendor/aos/aos.js"></script>
-	<script src="../css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="../css/vendor/glightbox/js/glightbox.min.js"></script>
-	<script src="../css/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script src="../../js/eventos.js"></script>
+	<script src="../../vendor/aos/aos.js"></script>
+	<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../../vendor/glightbox/js/glightbox.min.js"></script>
+	<script src="../../vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
 
 	<!-- Template Main JS File -->
-	<script src="../js/main.js"></script>
+	<script src="../../js/main.js"></script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ public class UploadUtil {
 			try {
 
 				// criando diretorio para armazena o arquivo
-				String pastaUploadImagem = "C:\\Users\\Positivo\\Downloads\\tilapia\\tilapia\\src\\main\\resources\\static\\img\\img-uploads";
+				String pastaUploadImagem = "C:\\Users\\rutie\\OneDrive\\Documentos\\GitHub\\RestauranteBotecoTilapia\\src\\main\\resources\\static\\img\\img-uploads";
 				File dir = new File(pastaUploadImagem);
 				if (!dir.exists()) {
 					dir.mkdirs();

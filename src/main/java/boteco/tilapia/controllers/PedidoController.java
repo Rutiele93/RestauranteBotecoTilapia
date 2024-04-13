@@ -6,7 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,16 +32,15 @@ public class PedidoController {
 	private ProdutoRepository produtoRepo;
 
 	@GetMapping("/cadastro")
-    public ModelAndView cadastro(Pedido pedido){
+	public ModelAndView cadastro(Pedido pedido) {
 		ModelAndView mv = new ModelAndView("pedido/cadastro");
 		mv.addObject("pedidos", pedido);
 		mv.addObject("status", CategoriaPedido.values());
-		mv.addObject("pagamento", Pagamento.values());	
+		mv.addObject("pagamento", Pagamento.values());
 		mv.addObject("clientes", clienteRepo.findAll());
-		mv.addObject("produtoselc", produtoRepo.findAll());	
+		mv.addObject("produtoselc", produtoRepo.findAll());
 		return mv;
 	}
-	
 
 	@PostMapping("/cadastroPedido")
 	public ModelAndView save(Pedido pedido) {
@@ -58,6 +56,5 @@ public class PedidoController {
 		mv.addObject("pedidosList", resultPage);
 		return mv;
 	}
-	    
-  }
 
+}

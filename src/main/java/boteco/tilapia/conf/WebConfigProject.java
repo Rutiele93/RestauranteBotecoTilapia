@@ -15,45 +15,45 @@ import boteco.tilapia.services.VendedorUserDetailsService;
 @Configuration
 @EnableWebSecurity
 public class WebConfigProject extends WebSecurityConfigurerAdapter {
-    
-	@Autowired
-    private VendedorUserDetailsService vendedorUserDetailsService;
 
-    @Autowired
-    private ClienteUserDetailsService clienteUserDetailsService;
-    
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-    	http.authorizeRequests()
-        .antMatchers("/img/**").permitAll()
-        .antMatchers("/css/**").permitAll()
-        .antMatchers("/js/**").permitAll()    
-        .antMatchers("/vendor/**").permitAll()
-        .anyRequest().authenticated();
-    	
-    	http.formLogin()
-        .loginPage("/login")
-        .defaultSuccessUrl("/")
-        .permitAll();
+        @Autowired
+        private VendedorUserDetailsService vendedorUserDetailsService;
 
-        http.logout()
-        .logoutRequestMatcher(
-            new AntPathRequestMatcher("/logout", "GET")
-        )
-        .logoutSuccessUrl("/login");
+        @Autowired
+        private ClienteUserDetailsService clienteUserDetailsService;
 
-        http.rememberMe()
-        .key("keyRemember-me");
-        
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+                http.authorizeRequests()
+                                // Rotas permitidas sem autenticação
+                                .antMatchers("/", "/sobre", "/events", "/chefs", "/gallery", "/contato",
+                                                "/cliente/cadastro", "/login", "/produto/list-produtos")
+                                .permitAll()
+                                // Outras rotas permitidas
+                                .antMatchers("/img/**", "/css/**", "/js/**", "/vendor/**").permitAll()
+                                .antMatchers("/vendedor/**").permitAll()
+                                // Todas as outras rotas precisam de autenticação
+                                .anyRequest().authenticated();
 
-    }
+                http.formLogin()
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/")
+                                .permitAll();
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(clienteUserDetailsService)
-        .passwordEncoder(new BCryptPasswordEncoder());
-        auth.userDetailsService(vendedorUserDetailsService)
-        .passwordEncoder(new BCryptPasswordEncoder());
-    }
+                http.logout()
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                                .logoutSuccessUrl("/login");
 
+                http.rememberMe()
+                                .key("keyRemember-me");
+        }
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+                // Configurar os serviços de autenticação para os usuários cliente e vendedor
+                auth.userDetailsService(clienteUserDetailsService)
+                                .passwordEncoder(new BCryptPasswordEncoder());
+                auth.userDetailsService(vendedorUserDetailsService)
+                                .passwordEncoder(new BCryptPasswordEncoder());
+        }
 }

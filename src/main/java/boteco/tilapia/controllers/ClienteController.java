@@ -20,94 +20,113 @@ import util.UploadUtil;
 @Controller
 @RequestMapping("/cliente")
 public class ClienteController {
-	
+
     @Autowired
     private ClienteRepository clienteRepo;
-	
-	@GetMapping("/cadastro")
-    public ModelAndView cadastro(Cliente cliente){
+
+    @GetMapping("/cadastro")
+    public ModelAndView cadastro(Cliente cliente) {
         ModelAndView mv = new ModelAndView("cliente/cadastro");
         mv.addObject("usuario", new Cliente());
-        Perfil[] perfilCliente = {Perfil.CLIENTE};
+        Perfil[] perfilCliente = { Perfil.CLIENTE };
         mv.addObject("perfils", perfilCliente);
         return mv;
     }
 
     @PostMapping("/cadastro-cliente")
-    public ModelAndView cadastro(@ModelAttribute Cliente cliente, @RequestParam("file") MultipartFile imagem){
-       ModelAndView mv =  new ModelAndView("cliente/cadastro");
-       
-       String hashSenha = PasswordUtil.encoder(cliente.getSenha());
-       cliente.setSenha(hashSenha);
+    public ModelAndView cadastro(@ModelAttribute Cliente cliente, @RequestParam("file") MultipartFile imagem) {
+        ModelAndView mv = new ModelAndView("cliente/cadastro");
 
-       mv.addObject("usuario", cliente);
+        String hashSenha = PasswordUtil.encoder(cliente.getSenha());
+        cliente.setSenha(hashSenha);
 
-       try {
-        if(UploadUtil.fazerUploadImagem(imagem)){
-            cliente.setImagem(imagem.getOriginalFilename());
-        }
-        clienteRepo.save(cliente);
-        System.out.println("Salvo com sucesso: " + cliente.getNome() + " " + cliente.getImagem());
-        return home();
-       } catch (Exception e) {
+        mv.addObject("usuario", cliente);
+
+        try {
+            if (UploadUtil.fazerUploadImagem(imagem)) {
+                cliente.setImagem(imagem.getOriginalFilename());
+            }
+            clienteRepo.save(cliente);
+            System.out.println("Salvo com sucesso: " + cliente.getNome() + " " + cliente.getImagem());
+            return home();
+        } catch (Exception e) {
             mv.addObject("msgErro", e.getMessage());
             System.out.println("Erro ao salvar " + e.getMessage());
             return mv;
-       }    
+        }
     }
-    
+
     @GetMapping("/listClientes")
-    public ModelAndView clientesList(){
-        ModelAndView mv = new ModelAndView("admin/clienteList");
+    public ModelAndView clientesList() {
+        ModelAndView mv = new ModelAndView("cliente/clienteList");
         mv.addObject("clientes", clienteRepo.findAll());
         return mv;
     }
 
     @GetMapping("/excluir/{id}")
-    public String excluirCliente(@PathVariable("id") Integer id){
+    public String excluirCliente(@PathVariable("id") Integer id) {
         clienteRepo.deleteById(id);
-        return "admin/clienteList";
+        return "cliente/clienteList";
     }
 
-    
-	@RequestMapping("/inicio-cliente")
-	public ModelAndView home(){
-		ModelAndView mv = new ModelAndView("home/index");
-		return mv;
-	}
-	
+    @RequestMapping("/inicio-cliente")
+    public ModelAndView home() {
+        ModelAndView mv = new ModelAndView("home/index");
+        return mv;
+    }
+
     @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") Integer id){
-        ModelAndView mv =  new ModelAndView("admin/editarCliente");
+    public ModelAndView editar(@PathVariable("id") Integer id) {
+        ModelAndView mv = new ModelAndView("cliente/editarCliente");
         mv.addObject("perfils", Perfil.values());
         mv.addObject("usuario", clienteRepo.findById(id));
         return mv;
     }
-	
-	@GetMapping("/editar-perfil")
-    public ModelAndView editarPerfil(@RequestParam("id") Integer id){
+
+    @PostMapping("/editar-cliente")
+    public ModelAndView editarCliente(@ModelAttribute("usuario") Cliente cliente,
+            @RequestParam("file") MultipartFile imagem) {
+        ModelAndView mv = new ModelAndView("cliente/editarCliente");
+
+        try {
+            if (UploadUtil.fazerUploadImagem(imagem)) {
+                cliente.setImagem(imagem.getOriginalFilename());
+            }
+            clienteRepo.save(cliente);
+            System.out.println("Salvo com sucesso: " + cliente.getNome() + " " + cliente.getImagem());
+            return home();
+        } catch (Exception e) {
+            mv.addObject("msgErro", e.getMessage());
+            System.out.println("Erro ao salvar " + e.getMessage());
+            return mv;
+        }
+
+    }
+
+    @GetMapping("/editar-perfil")
+    public ModelAndView editarPerfil(@RequestParam("id") Integer id) {
         ModelAndView mv = new ModelAndView("cliente/editProfile");
         mv.addObject("usuario", clienteRepo.findById(id));
         return mv;
     }
 
     @PostMapping("/editar-perfil")
-    public ModelAndView editarPerfil(@ModelAttribute Cliente cliente, @RequestParam("file") MultipartFile imagem){
+    public ModelAndView editarPerfil(@ModelAttribute Cliente cliente, @RequestParam("file") MultipartFile imagem) {
         ModelAndView mv = new ModelAndView("cliente/editProfile");
-        
+
         try {
-            if(UploadUtil.fazerUploadImagem(imagem)){
+            if (UploadUtil.fazerUploadImagem(imagem)) {
                 cliente.setImagem(imagem.getOriginalFilename());
             }
             clienteRepo.save(cliente);
             System.out.println("Salvo com sucesso: " + cliente.getNome() + " " + cliente.getImagem());
             return home();
-           } catch (Exception e) {
-                mv.addObject("msgErro", e.getMessage());
-                System.out.println("Erro ao salvar " + e.getMessage());
-                return mv;
-           }
-    
+        } catch (Exception e) {
+            mv.addObject("msgErro", e.getMessage());
+            System.out.println("Erro ao salvar " + e.getMessage());
+            return mv;
+        }
+
     }
 
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import boteco.tilapia.model.Produto;
 
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Integer>{
+public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
 }
